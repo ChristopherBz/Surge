@@ -1735,7 +1735,8 @@ p + .list-marked {
 	font-size: 15px;
 	line-height: 1.2;
 	letter-spacing: .025em;
-	color: #151515;
+	color: #fff;
+	background-color: #151515;
 }
 
 .list-nav:empty {
@@ -7751,7 +7752,6 @@ html:not(.lt-ie10) .not-animated {
 .rd-navbar-static .rd-nav-link {
 	position: relative;
 	display: inline-block;
-	color: #151515;
 	font-size: 17px;
 	transition: .25s;
 }
@@ -8055,6 +8055,7 @@ html:not(.lt-ie10) .not-animated {
 
 .rd-navbar-fixed .rd-navbar-toggle {
 	display: inline-block;
+	background-color: #fff;
 }
 
 .rd-navbar-fixed .rd-navbar-brand {
@@ -8093,6 +8094,8 @@ html:not(.lt-ie10) .not-animated {
 	align-items: center;
 	height: 56px;
 	padding: 4px;
+	background-color: #000000;
+	color: #fff;
 }
 
 .rd-navbar-fixed .rd-navbar-nav-outer {
@@ -8445,14 +8448,14 @@ html:not(.lt-ie10) .not-animated {
 }
 
 .rd-navbar-fixed .rd-navbar-panel {
-	color: #9b9b9b;
+	color: #fff;
 	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-	background: #fff;
+	background: #000000;
 }
 
 .rd-navbar-fixed .rd-navbar-nav-outer {
 	color: #fff;
-	background: #fff;
+	background: #000000;
 	border: 1px solid #f6f6f6;
 	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
@@ -8467,7 +8470,7 @@ html:not(.lt-ie10) .not-animated {
 }
 
 .rd-navbar-fixed .rd-nav-link {
-	color: #151515;
+	color: #fff;
 }
 
 .rd-navbar-fixed .rd-megamenu-list > li > a,
@@ -8590,6 +8593,8 @@ html.rd-navbar-fixed-linked .page {
 	justify-content: space-between;
 	padding: 0 220px 0 35px;
 	margin: 0 auto;
+	background-color: #000000;
+	color: #fff;
 }
 
 .rd-navbar-classic.rd-navbar-static .rd-navbar-main > * + * {
