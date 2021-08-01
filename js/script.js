@@ -1782,6 +1782,7 @@
 }());
 
 
+
 // Ipad/Iphone fix for double clicking links
 if(/iPhone|iPad/i.test(navigator.userAgent)) {
   $('.nav-link').on('touchend', function (e) {
