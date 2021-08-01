@@ -8404,6 +8404,23 @@
 	content: "\f634";
 }
 
+/* */
+.mdi-discord:before {
+	content: "\f086";
+}
+
+.mdi-discord-box:before {
+	content: "\f086";
+}
+
+.mdi-discord-circle:before {
+	content: "\f086";
+}
+
+.mdi-discord-retweet:before {
+	content: "\f086";
+}
+
 .mdi-ubuntu:before {
 	content: "\f635";
 }
