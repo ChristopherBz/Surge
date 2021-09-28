@@ -637,85 +637,85 @@
       plugins.copyrightYear.text(initialDate.getFullYear());
     }
 
-    // RD Google Maps
-    if (plugins.rdGoogleMaps.length) {
-      $.getScript("//maps.google.com/maps/api/js?key=AIzaSyAwH60q5rWrS8bXwpkZwZwhw9Bw0pqKTZM&sensor=false&libraries=geometry,places&v=3.7", function () {
-        var head = document.getElementsByTagName('head')[0],
-          insertBefore = head.insertBefore;
+    // // RD Google Maps
+    // if (plugins.rdGoogleMaps.length) {
+    //   $.getScript("//maps.google.com/maps/api/js?key=AIzaSyAwH60q5rWrS8bXwpkZwZwhw9Bw0pqKTZM&sensor=false&libraries=geometry,places&v=3.7", function () {
+    //     var head = document.getElementsByTagName('head')[0],
+    //       insertBefore = head.insertBefore;
 
-        head.insertBefore = function (newElement, referenceElement) {
-          if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') !== -1 || newElement.innerHTML.indexOf('gm-style') !== -1) {
-            return;
-          }
-          insertBefore.call(head, newElement, referenceElement);
-        };
+    //     head.insertBefore = function (newElement, referenceElement) {
+    //       if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') !== -1 || newElement.innerHTML.indexOf('gm-style') !== -1) {
+    //         return;
+    //       }
+    //       insertBefore.call(head, newElement, referenceElement);
+    //     };
 
-        for (var i = 0; i < plugins.rdGoogleMaps.length; i++) {
-          var $googleMapItem = $(plugins.rdGoogleMaps[i]);
+    //     for (var i = 0; i < plugins.rdGoogleMaps.length; i++) {
+    //       var $googleMapItem = $(plugins.rdGoogleMaps[i]);
 
-          lazyInit($googleMapItem, $.proxy(function () {
-            var $this = $(this),
-              styles = $this.attr("data-styles");
+    //       lazyInit($googleMapItem, $.proxy(function () {
+    //         var $this = $(this),
+    //           styles = $this.attr("data-styles");
 
-            $this.googleMap({
-              marker: {
-                basic: $this.data('marker'),
-                active: $this.data('marker-active')
-              },
-              styles: styles ? JSON.parse(styles) : [],
-              onInit: function (map) {
-                var inputAddress = $('#rd-google-map-address');
-
-
-                if (inputAddress.length) {
-                  var input = inputAddress;
-                  var geocoder = new google.maps.Geocoder();
-                  var marker = new google.maps.Marker(
-                    {
-                      map: map,
-                      icon: $this.data('marker-url')
-                    }
-                  );
-
-                  var autocomplete = new google.maps.places.Autocomplete(inputAddress[0]);
-                  autocomplete.bindTo('bounds', map);
-                  inputAddress.attr('placeholder', '');
-                  inputAddress.on('change', function () {
-                    $("#rd-google-map-address-submit").trigger('click');
-                  });
-                  inputAddress.on('keydown', function (e) {
-                    if (e.keyCode === 13) {
-                      $("#rd-google-map-address-submit").trigger('click');
-                    }
-                  });
+    //         $this.googleMap({
+    //           marker: {
+    //             basic: $this.data('marker'),
+    //             active: $this.data('marker-active')
+    //           },
+    //           styles: styles ? JSON.parse(styles) : [],
+    //           onInit: function (map) {
+    //             var inputAddress = $('#rd-google-map-address');
 
 
-                  $("#rd-google-map-address-submit").on('click', function (e) {
-                    e.preventDefault();
-                    var address = input.val();
-                    geocoder.geocode({'address': address}, function (results, status) {
-                      if (status === google.maps.GeocoderStatus.OK) {
-                        var latitude = results[0].geometry.location.lat();
-                        var longitude = results[0].geometry.location.lng();
+    //             if (inputAddress.length) {
+    //               var input = inputAddress;
+    //               var geocoder = new google.maps.Geocoder();
+    //               var marker = new google.maps.Marker(
+    //                 {
+    //                   map: map,
+    //                   icon: $this.data('marker-url')
+    //                 }
+    //               );
 
-                        map.setCenter(new google.maps.LatLng(
-                          parseFloat(latitude),
-                          parseFloat(longitude)
-                        ));
-                        marker.setPosition(new google.maps.LatLng(
-                          parseFloat(latitude),
-                          parseFloat(longitude)
-                        ))
-                      }
-                    });
-                  });
-                }
-              }
-            });
-          }, $googleMapItem));
-        }
-      });
-    }
+    //               var autocomplete = new google.maps.places.Autocomplete(inputAddress[0]);
+    //               autocomplete.bindTo('bounds', map);
+    //               inputAddress.attr('placeholder', '');
+    //               inputAddress.on('change', function () {
+    //                 $("#rd-google-map-address-submit").trigger('click');
+    //               });
+    //               inputAddress.on('keydown', function (e) {
+    //                 if (e.keyCode === 13) {
+    //                   $("#rd-google-map-address-submit").trigger('click');
+    //                 }
+    //               });
+
+
+    //               $("#rd-google-map-address-submit").on('click', function (e) {
+    //                 e.preventDefault();
+    //                 var address = input.val();
+    //                 geocoder.geocode({'address': address}, function (results, status) {
+    //                   if (status === google.maps.GeocoderStatus.OK) {
+    //                     var latitude = results[0].geometry.location.lat();
+    //                     var longitude = results[0].geometry.location.lng();
+
+    //                     map.setCenter(new google.maps.LatLng(
+    //                       parseFloat(latitude),
+    //                       parseFloat(longitude)
+    //                     ));
+    //                     marker.setPosition(new google.maps.LatLng(
+    //                       parseFloat(latitude),
+    //                       parseFloat(longitude)
+    //                     ))
+    //                   }
+    //                 });
+    //               });
+    //             }
+    //           }
+    //         });
+    //       }, $googleMapItem));
+    //     }
+    //   });
+    // }
 
     // Add custom styling options for input[type="radio"]
     if (plugins.radio.length) {
@@ -938,65 +938,65 @@
       attachFormValidator(plugins.regula);
     }
 
-    // MailChimp Ajax subscription
-    if (plugins.mailchimp.length) {
-      for (i = 0; i < plugins.mailchimp.length; i++) {
-        var $mailchimpItem = $(plugins.mailchimp[i]),
-          $email = $mailchimpItem.find('input[type="email"]');
+    // // MailChimp Ajax subscription
+    // if (plugins.mailchimp.length) {
+    //   for (i = 0; i < plugins.mailchimp.length; i++) {
+    //     var $mailchimpItem = $(plugins.mailchimp[i]),
+    //       $email = $mailchimpItem.find('input[type="email"]');
 
-        // Required by MailChimp
-        $mailchimpItem.attr('novalidate', 'true');
-        $email.attr('name', 'EMAIL');
+    //     // Required by MailChimp
+    //     $mailchimpItem.attr('novalidate', 'true');
+    //     $email.attr('name', 'EMAIL');
 
-        $mailchimpItem.on('submit', $.proxy(function (e) {
-          e.preventDefault();
+    //     $mailchimpItem.on('submit', $.proxy(function (e) {
+    //       e.preventDefault();
 
-          var $this = this;
+    //       var $this = this;
 
-          var data = {},
-            url = $this.attr('action').replace('/post?', '/post-json?').concat('&c=?'),
-            dataArray = $this.serializeArray(),
-            $output = $("#" + $this.attr("data-form-output"));
+    //       var data = {},
+    //         url = $this.attr('action').replace('/post?', '/post-json?').concat('&c=?'),
+    //         dataArray = $this.serializeArray(),
+    //         $output = $("#" + $this.attr("data-form-output"));
 
-          for (i = 0; i < dataArray.length; i++) {
-            data[dataArray[i].name] = dataArray[i].value;
-          }
+    //       for (i = 0; i < dataArray.length; i++) {
+    //         data[dataArray[i].name] = dataArray[i].value;
+    //       }
 
-          $.ajax({
-            data: data,
-            url: url,
-            dataType: 'jsonp',
-            error: function (resp, text) {
-              $output.html('Server error: ' + text);
+    //       $.ajax({
+    //         data: data,
+    //         url: url,
+    //         dataType: 'jsonp',
+    //         error: function (resp, text) {
+    //           $output.html('Server error: ' + text);
 
-              setTimeout(function () {
-                $output.removeClass("active");
-              }, 4000);
-            },
-            success: function (resp) {
-              $output.html(resp.msg).addClass('active');
+    //           setTimeout(function () {
+    //             $output.removeClass("active");
+    //           }, 4000);
+    //         },
+    //         success: function (resp) {
+    //           $output.html(resp.msg).addClass('active');
 
-              setTimeout(function () {
-                $output.removeClass("active");
-              }, 6000);
-            },
-            beforeSend: function (data) {
-              // Stop request if builder or inputs are invalide
-              if (isNoviBuilder || !isValidated($this.find('[data-constraints]')))
-                return false;
+    //           setTimeout(function () {
+    //             $output.removeClass("active");
+    //           }, 6000);
+    //         },
+    //         beforeSend: function (data) {
+    //           // Stop request if builder or inputs are invalide
+    //           if (isNoviBuilder || !isValidated($this.find('[data-constraints]')))
+    //             return false;
 
-              $output.html('Submitting...').addClass('active');
-            }
-          });
+    //           $output.html('Submitting...').addClass('active');
+    //         }
+    //       });
 
-          // Clear inputs after submit
-          var inputs = $this[0].getElementsByTagName('input');
-          for (var i = 0; i < inputs.length; i++) inputs[i].value = '';
+    //       // Clear inputs after submit
+    //       var inputs = $this[0].getElementsByTagName('input');
+    //       for (var i = 0; i < inputs.length; i++) inputs[i].value = '';
 
-          return false;
-        }, $mailchimpItem));
-      }
-    }
+    //       return false;
+    //     }, $mailchimpItem));
+    //   }
+    // }
 
     // Campaign Monitor ajax subscription
     if (plugins.campaignMonitor.length) {
@@ -1051,153 +1051,153 @@
     }
 
     // RD Mailform
-    if (plugins.rdMailForm.length) {
-      var i, j, k,
-        msg = {
-          'MF000': 'Successfully sent!',
-          'MF001': 'Recipients are not set!',
-          'MF002': 'Form will not work locally!',
-          'MF003': 'Please, define email field in your form!',
-          'MF004': 'Please, define type of your form!',
-          'MF254': 'Something went wrong with PHPMailer!',
-          'MF255': 'Aw, snap! Something went wrong.'
-        };
+    // if (plugins.rdMailForm.length) {
+    //   var i, j, k,
+    //     msg = {
+    //       'MF000': 'Successfully sent!',
+    //       'MF001': 'Recipients are not set!',
+    //       'MF002': 'Form will not work locally!',
+    //       'MF003': 'Please, define email field in your form!',
+    //       'MF004': 'Please, define type of your form!',
+    //       'MF254': 'Something went wrong with PHPMailer!',
+    //       'MF255': 'Aw, snap! Something went wrong.'
+    //     };
 
-      for (i = 0; i < plugins.rdMailForm.length; i++) {
-        var $form = $(plugins.rdMailForm[i]),
-          formHasCaptcha = false;
+    //   for (i = 0; i < plugins.rdMailForm.length; i++) {
+    //     var $form = $(plugins.rdMailForm[i]),
+    //       formHasCaptcha = false;
 
-        $form.attr('novalidate', 'novalidate').ajaxForm({
-          data: {
-            "form-type": $form.attr("data-form-type") || "contact",
-            "counter": i
-          },
-          beforeSubmit: function (arr, $form, options) {
-            if (isNoviBuilder)
-              return;
+    //     $form.attr('novalidate', 'novalidate').ajaxForm({
+    //       data: {
+    //         "form-type": $form.attr("data-form-type") || "contact",
+    //         "counter": i
+    //       },
+    //       beforeSubmit: function (arr, $form, options) {
+    //         if (isNoviBuilder)
+    //           return;
 
-            var form = $(plugins.rdMailForm[this.extraData.counter]),
-              inputs = form.find("[data-constraints]"),
-              output = $("#" + form.attr("data-form-output")),
-              captcha = form.find('.recaptcha'),
-              captchaFlag = true;
+    //         var form = $(plugins.rdMailForm[this.extraData.counter]),
+    //           inputs = form.find("[data-constraints]"),
+    //           output = $("#" + form.attr("data-form-output")),
+    //           captcha = form.find('.recaptcha'),
+    //           captchaFlag = true;
 
-            output.removeClass("active error success");
+    //         output.removeClass("active error success");
 
-            if (isValidated(inputs, captcha)) {
+    //         if (isValidated(inputs, captcha)) {
 
-              // veify reCaptcha
-              if (captcha.length) {
-                var captchaToken = captcha.find('.g-recaptcha-response').val(),
-                  captchaMsg = {
-                    'CPT001': 'Please, setup you "site key" and "secret key" of reCaptcha',
-                    'CPT002': 'Something wrong with google reCaptcha'
-                  };
+    //           // veify reCaptcha
+    //           if (captcha.length) {
+    //             var captchaToken = captcha.find('.g-recaptcha-response').val(),
+    //               captchaMsg = {
+    //                 'CPT001': 'Please, setup you "site key" and "secret key" of reCaptcha',
+    //                 'CPT002': 'Something wrong with google reCaptcha'
+    //               };
 
-                formHasCaptcha = true;
+    //             formHasCaptcha = true;
 
-                $.ajax({
-                  method: "POST",
-                  url: "bat/reCaptcha.php",
-                  data: {'g-recaptcha-response': captchaToken},
-                  async: false
-                })
-                  .done(function (responceCode) {
-                    if (responceCode !== 'CPT000') {
-                      if (output.hasClass("snackbars")) {
-                        output.html('<p><span class="icon text-middle mdi mdi-check icon-xxs"></span><span>' + captchaMsg[responceCode] + '</span></p>')
+    //             $.ajax({
+    //               method: "POST",
+    //               url: "bat/reCaptcha.php",
+    //               data: {'g-recaptcha-response': captchaToken},
+    //               async: false
+    //             })
+    //               .done(function (responceCode) {
+    //                 if (responceCode !== 'CPT000') {
+    //                   if (output.hasClass("snackbars")) {
+    //                     output.html('<p><span class="icon text-middle mdi mdi-check icon-xxs"></span><span>' + captchaMsg[responceCode] + '</span></p>')
 
-                        setTimeout(function () {
-                          output.removeClass("active");
-                        }, 3500);
+    //                     setTimeout(function () {
+    //                       output.removeClass("active");
+    //                     }, 3500);
 
-                        captchaFlag = false;
-                      } else {
-                        output.html(captchaMsg[responceCode]);
-                      }
+    //                     captchaFlag = false;
+    //                   } else {
+    //                     output.html(captchaMsg[responceCode]);
+    //                   }
 
-                      output.addClass("active");
-                    }
-                  });
-              }
+    //                   output.addClass("active");
+    //                 }
+    //               });
+    //           }
 
-              if (!captchaFlag) {
-                return false;
-              }
+    //           if (!captchaFlag) {
+    //             return false;
+    //           }
 
-              form.addClass('form-in-process');
+    //           form.addClass('form-in-process');
 
-              if (output.hasClass("snackbars")) {
-                output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span>Sending</span></p>');
-                output.addClass("active");
-              }
-            } else {
-              return false;
-            }
-          },
-          error: function (result) {
-            if (isNoviBuilder)
-              return;
+    //           if (output.hasClass("snackbars")) {
+    //             output.html('<p><span class="icon text-middle fa fa-circle-o-notch fa-spin icon-xxs"></span><span>Sending</span></p>');
+    //             output.addClass("active");
+    //           }
+    //         } else {
+    //           return false;
+    //         }
+    //       },
+    //       error: function (result) {
+    //         if (isNoviBuilder)
+    //           return;
 
-            var output = $("#" + $(plugins.rdMailForm[this.extraData.counter]).attr("data-form-output")),
-              form = $(plugins.rdMailForm[this.extraData.counter]);
+    //         var output = $("#" + $(plugins.rdMailForm[this.extraData.counter]).attr("data-form-output")),
+    //           form = $(plugins.rdMailForm[this.extraData.counter]);
 
-            output.text(msg[result]);
-            form.removeClass('form-in-process');
+    //         output.text(msg[result]);
+    //         form.removeClass('form-in-process');
 
-            if (formHasCaptcha) {
-              grecaptcha.reset();
-            }
-          },
-          success: function (result) {
-            if (isNoviBuilder)
-              return;
+    //         if (formHasCaptcha) {
+    //           grecaptcha.reset();
+    //         }
+    //       },
+    //       success: function (result) {
+    //         if (isNoviBuilder)
+    //           return;
 
-            var form = $(plugins.rdMailForm[this.extraData.counter]),
-              output = $("#" + form.attr("data-form-output")),
-              select = form.find('select');
+    //         var form = $(plugins.rdMailForm[this.extraData.counter]),
+    //           output = $("#" + form.attr("data-form-output")),
+    //           select = form.find('select');
 
-            form
-              .addClass('success')
-              .removeClass('form-in-process');
+    //         form
+    //           .addClass('success')
+    //           .removeClass('form-in-process');
 
-            if (formHasCaptcha) {
-              grecaptcha.reset();
-            }
+    //         if (formHasCaptcha) {
+    //           grecaptcha.reset();
+    //         }
 
-            result = result.length === 5 ? result : 'MF255';
-            output.text(msg[result]);
+    //         result = result.length === 5 ? result : 'MF255';
+    //         output.text(msg[result]);
 
-            if (result === "MF000") {
-              if (output.hasClass("snackbars")) {
-                output.html('<p><span class="icon text-middle mdi mdi-check icon-xxs"></span><span>' + msg[result] + '</span></p>');
-              } else {
-                output.addClass("active success");
-              }
-            } else {
-              if (output.hasClass("snackbars")) {
-                output.html(' <p class="snackbars-left"><span class="icon icon-xxs mdi mdi-alert-outline text-middle"></span><span>' + msg[result] + '</span></p>');
-              } else {
-                output.addClass("active error");
-              }
-            }
+    //         if (result === "MF000") {
+    //           if (output.hasClass("snackbars")) {
+    //             output.html('<p><span class="icon text-middle mdi mdi-check icon-xxs"></span><span>' + msg[result] + '</span></p>');
+    //           } else {
+    //             output.addClass("active success");
+    //           }
+    //         } else {
+    //           if (output.hasClass("snackbars")) {
+    //             output.html(' <p class="snackbars-left"><span class="icon icon-xxs mdi mdi-alert-outline text-middle"></span><span>' + msg[result] + '</span></p>');
+    //           } else {
+    //             output.addClass("active error");
+    //           }
+    //         }
 
-            form.clearForm();
+    //         form.clearForm();
 
-            if (select.length) {
-              select.select2("val", "");
-            }
+    //         if (select.length) {
+    //           select.select2("val", "");
+    //         }
 
-            form.find('input, textarea').trigger('blur');
+    //         form.find('input, textarea').trigger('blur');
 
-            setTimeout(function () {
-              output.removeClass("active error success");
-              form.removeClass('success');
-            }, 3500);
-          }
-        });
-      }
-    }
+    //         setTimeout(function () {
+    //           output.removeClass("active error success");
+    //           form.removeClass('success');
+    //         }, 3500);
+    //       }
+    //     });
+    //   }
+    // }
 
     // lightGallery
     if (plugins.lightGallery.length) {
@@ -1541,94 +1541,94 @@
 
   /**
    * BTC to currency calculator (and vice versa)
-   */
-  if (plugins.btcCalculator.length) {
+  //  */
+  // if (plugins.btcCalculator.length) {
 
-    $.getJSON("https://blockchain.info/ticker", function (btcJsonData) {
-      var currencyList = [];
-      var index = 0;
+  //   $.getJSON("https://blockchain.info/ticker", function (btcJsonData) {
+  //     var currencyList = [];
+  //     var index = 0;
 
-      for (var currency in btcJsonData) {
-        currencyList.push({"id": index, "text": currency});
-        index++;
-      }
+  //     for (var currency in btcJsonData) {
+  //       currencyList.push({"id": index, "text": currency});
+  //       index++;
+  //     }
 
-      for (var i = 0; i < plugins.btcCalculator.length; i++) {
-        var btcForm = $(plugins.btcCalculator[i]),
-          btcFormInput = $(btcForm.find('[name="btc-calculator-value"]')),
-          btcFormOutput = $(btcForm.find('[name="btc-calculator-result"]')),
-          btcFormCurrencySelect = $(btcForm.find('[name="btc-calculator-currency"]'));
+  //     for (var i = 0; i < plugins.btcCalculator.length; i++) {
+  //       var btcForm = $(plugins.btcCalculator[i]),
+  //         btcFormInput = $(btcForm.find('[name="btc-calculator-value"]')),
+  //         btcFormOutput = $(btcForm.find('[name="btc-calculator-result"]')),
+  //         btcFormCurrencySelect = $(btcForm.find('[name="btc-calculator-currency"]'));
 
-        btcFormCurrencySelect.select2({
-          placeholder: btcFormCurrencySelect.attr("data-placeholder") ? btcFormCurrencySelect.attr("data-placeholder") : false,
-          minimumResultsForSearch: btcFormCurrencySelect.attr("data-minimum-results-search") ? btcFormCurrencySelect.attr("data-minimum-results-search") : 50,
-          maximumSelectionSize: 3,
-          dropdownCssClass: btcFormCurrencySelect.attr("data-dropdown-class") ? btcFormCurrencySelect.attr("data-dropdown-class") : '',
-          data: currencyList
-        });
+  //       btcFormCurrencySelect.select2({
+  //         placeholder: btcFormCurrencySelect.attr("data-placeholder") ? btcFormCurrencySelect.attr("data-placeholder") : false,
+  //         minimumResultsForSearch: btcFormCurrencySelect.attr("data-minimum-results-search") ? btcFormCurrencySelect.attr("data-minimum-results-search") : 50,
+  //         maximumSelectionSize: 3,
+  //         dropdownCssClass: btcFormCurrencySelect.attr("data-dropdown-class") ? btcFormCurrencySelect.attr("data-dropdown-class") : '',
+  //         data: currencyList
+  //       });
 
-        if (btcFormInput.length && btcFormOutput.length) {
-          // BTC => Currency
-          (function (btcFormInput, btcFormOutput, btcFormCurrencySelect) {
-            var lastChanged = 'btc';
+  //       if (btcFormInput.length && btcFormOutput.length) {
+  //         // BTC => Currency
+  //         (function (btcFormInput, btcFormOutput, btcFormCurrencySelect) {
+  //           var lastChanged = 'btc';
 
-            btcFormInput.on('input', function () {
-              // store current positions in variables
-              var selectionStart = this.selectionStart,
-                selectionEnd = this.selectionEnd;
+  //           btcFormInput.on('input', function () {
+  //             // store current positions in variables
+  //             var selectionStart = this.selectionStart,
+  //               selectionEnd = this.selectionEnd;
 
-              this.value = toCryptoCurrencyFormat(this.value);
+  //             this.value = toCryptoCurrencyFormat(this.value);
 
-              // restore cursor position
-              this.setSelectionRange(selectionStart, selectionEnd);
+  //             // restore cursor position
+  //             this.setSelectionRange(selectionStart, selectionEnd);
                             
-              btcFormOutput.val(toCurrencyFormat('' + btcJsonData[btcFormCurrencySelect.select2('data')[0].text]["buy"] * this.value));
-              lastChanged = 'btc';
-            });
+  //             btcFormOutput.val(toCurrencyFormat('' + btcJsonData[btcFormCurrencySelect.select2('data')[0].text]["buy"] * this.value));
+  //             lastChanged = 'btc';
+  //           });
 
-            // Currency => BTC
-            btcFormOutput.on('input', function () {
-              // store current positions in variables
-              var selectionStart = this.selectionStart,
-                selectionEnd = this.selectionEnd;
+  //           // Currency => BTC
+  //           btcFormOutput.on('input', function () {
+  //             // store current positions in variables
+  //             var selectionStart = this.selectionStart,
+  //               selectionEnd = this.selectionEnd;
 
-              this.value = toCurrencyFormat(this.value);
+  //             this.value = toCurrencyFormat(this.value);
 
-              // restore cursor position
-              this.setSelectionRange(selectionStart, selectionEnd);
+  //             // restore cursor position
+  //             this.setSelectionRange(selectionStart, selectionEnd);
               
-              btcFormInput.val(toCryptoCurrencyFormat('' + this.value / btcJsonData[btcFormCurrencySelect.select2('data')[0].text]["sell"]));
-              lastChanged = 'currency';
-            });
+  //             btcFormInput.val(toCryptoCurrencyFormat('' + this.value / btcJsonData[btcFormCurrencySelect.select2('data')[0].text]["sell"]));
+  //             lastChanged = 'currency';
+  //           });
 
-            btcFormInput.trigger('input');
-            btcFormOutput.blur();
+  //           btcFormInput.trigger('input');
+  //           btcFormOutput.blur();
 
-            btcFormCurrencySelect.on('change', function () {
-              if (lastChanged === 'btc') {
-                btcFormOutput.val(toCurrencyFormat('' + btcJsonData[btcFormCurrencySelect.select2('data')[0].text]["buy"] * btcFormInput.val()));
-              } else {
-                btcFormInput.val(toCryptoCurrencyFormat('' + btcFormOutput.val() / btcJsonData[btcFormCurrencySelect.select2('data')[0].text]["sell"]));
-              }
-            });
-          })(btcFormInput, btcFormOutput, btcFormCurrencySelect);
-        }
-      }
-    })
-      .fail(function () {
-        console.log('Error while fetching data from https://blockchain.info/ticker');
-      });
-  }
+  //           btcFormCurrencySelect.on('change', function () {
+  //             if (lastChanged === 'btc') {
+  //               btcFormOutput.val(toCurrencyFormat('' + btcJsonData[btcFormCurrencySelect.select2('data')[0].text]["buy"] * btcFormInput.val()));
+  //             } else {
+  //               btcFormInput.val(toCryptoCurrencyFormat('' + btcFormOutput.val() / btcJsonData[btcFormCurrencySelect.select2('data')[0].text]["sell"]));
+  //             }
+  //           });
+  //         })(btcFormInput, btcFormOutput, btcFormCurrencySelect);
+  //       }
+  //     }
+  //   })
+  //     .fail(function () {
+  //       console.log('Error while fetching data from https://blockchain.info/ticker');
+  //     });
+  // }
 
-  function toCurrencyFormat(stringValue) {
-    var value = parseFloat(stringValue.replace(/[^\d.]/g, '')).toFixed(2);
-    return $.isNumeric(value) ? value : 0;
-  }
+  // function toCurrencyFormat(stringValue) {
+  //   var value = parseFloat(stringValue.replace(/[^\d.]/g, '')).toFixed(2);
+  //   return $.isNumeric(value) ? value : 0;
+  // }
 
-  function toCryptoCurrencyFormat(stringValue) {
-    var value = parseFloat(stringValue.replace(/[^\d.]/g, '')).toFixed(8);
-    return $.isNumeric(value) ? value : 0;
-  }
+  // function toCryptoCurrencyFormat(stringValue) {
+  //   var value = parseFloat(stringValue.replace(/[^\d.]/g, '')).toFixed(8);
+  //   return $.isNumeric(value) ? value : 0;
+  // }
 
   /**
    * Parallax JS
@@ -1760,24 +1760,24 @@
   /**
    * Custom Video Overlay
    */
-  if (plugins.videoOverlay.length) {
-    for (var i = 0; i < plugins.videoOverlay.length; i++) {
-      var overlay = $(plugins.videoOverlay[i]);
+  // if (plugins.videoOverlay.length) {
+  //   for (var i = 0; i < plugins.videoOverlay.length; i++) {
+  //     var overlay = $(plugins.videoOverlay[i]);
 
-      if (overlay) {
-        overlay.css({'opacity': '1'});
-        overlay.on('click', function () {
-          $(this).animate({
-              opacity: 0
-            },
-            function () {
-              this.style.display = 'none';
-            }
-          );
-        });
-      }
-    }
-  }
+  //     if (overlay) {
+  //       overlay.css({'opacity': '1'});
+  //       overlay.on('click', function () {
+  //         $(this).animate({
+  //             opacity: 0
+  //           },
+  //           function () {
+  //             this.style.display = 'none';
+  //           }
+  //         );
+  //       });
+  //     }
+  //   }
+  // }
 
 }());
 
